@@ -1,5 +1,5 @@
 /* Configuración: número internacional sin +, espacios ni guiones. */
-const WHATSAPP_NUMBER = "5493515291401";
+const WHATSAPP_NUMBER = "5493512065139";
 const CART_KEY = "importa_cart_v1";
 const PRODUCT_DATA = [
   {id:'p1',title:'Auriculares Pro X',category:'Audio',price:24999,img:'auriculares-pro-x.png',icon:'🎧',tag:'MÁS VENDIDO',desc:'Sonido envolvente y cancelación de ruido para acompañarte en cualquier lugar.',short:'Cancelación de ruido · Bluetooth'},
@@ -32,6 +32,7 @@ function composeMessage(){const items=getValidCartItems();if(!items.length)retur
 function openWhatsApp(message=''){const number=WHATSAPP_NUMBER.replace(/\D/g,'');if(!number){showToast('Configurá el número de WhatsApp en index.js');return}const url=`https://wa.me/${number}${message?'?text='+encodeURIComponent(message):''}`;window.open(url,'_blank','noopener,noreferrer')}
 document.addEventListener('click',event=>{const add=event.target.closest('[data-add]');if(add){addToCart(add.dataset.add);return}const view=event.target.closest('[data-view]');if(view)openModal(view.dataset.view);const qty=event.target.closest('[data-qty]');if(qty)changeQty(qty.dataset.qty,Number(qty.dataset.delta))});
 $('#searchInput').addEventListener('input',event=>renderProducts(event.target.value));$('#sortSelect').addEventListener('change',()=>renderProducts($('#searchInput').value));$('#openCartBtn').addEventListener('click',()=>$('#cartPanel').classList.add('open'));$('#closeCartBtn').addEventListener('click',()=>$('#cartPanel').classList.remove('open'));$('#checkoutBtn').addEventListener('click',()=>{if(!getValidCartItems().length){showToast('Agregá productos antes de continuar');return}openWhatsApp(composeMessage())});$('#whatsappBtn').addEventListener('click',event=>{event.preventDefault();openWhatsApp()});$('#clearCartBtn').addEventListener('click',()=>{if(getValidCartItems().length&&confirm('¿Vaciar el pedido?')){app.cart={};saveCart();showToast('Pedido vaciado')}});document.addEventListener('keydown',event=>{if(event.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){event.preventDefault();$('#searchInput').focus()}if(event.key==='Escape')$('#cartPanel').classList.remove('open')});$('#year').textContent=new Date().getFullYear();renderProducts();renderCart();
+
 
 
 
